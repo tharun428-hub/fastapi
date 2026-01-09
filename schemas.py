@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from typing import Optional
 
 class StudentBase(BaseModel):
     name: str
@@ -9,8 +10,11 @@ class StudentBase(BaseModel):
 class StudentCreate(StudentBase):
     pass
 
-class StudentUpdate(StudentBase):
-    pass
+class StudentUpdate(BaseModel):
+    name: Optional[str] = None
+    age: Optional[int] = None
+    email: Optional[str] = None
+    course: Optional[str] = None
 
 class StudentResponse(StudentBase):
     id: int
