@@ -1,12 +1,14 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
+
 import models
 from database import engine, SessionLocal
 import crud, schemas
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Student Management System")#Creates tables in PostgreSQL if they do not already exist Reads table structure from models.py                                                
+app = FastAPI(title="Student Management System")
+
 def get_db():
     db = SessionLocal()
     try:
