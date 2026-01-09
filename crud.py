@@ -18,8 +18,15 @@ def get_student(db: Session, student_id: int):
 def update_student(db: Session, student_id: int, student: StudentUpdate):
     db_student = get_student(db, student_id)
     if db_student:
-        for key, value in student.dict().items():
-            setattr(db_student, key, value)
+        # Update only the fields that are provided (not None)
+        if student.name is not None:
+            db_student.name = student.name
+        if student.age is not None:
+            db_student.age = student.age
+        if student.email is not None:
+            db_student.email = student.email
+        if student.course is not None:
+            db_student.course = student.course
         db.commit()
         db.refresh(db_student)
     return db_student
